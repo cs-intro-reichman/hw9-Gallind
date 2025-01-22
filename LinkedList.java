@@ -229,7 +229,7 @@ public class LinkedList {
 			/*for (int i = 0; i < index - 1; i++) {
 				temp = temp.next;
 			}*/
-			temp = getNode(size - 1);
+			temp = getNode(size - 2);
 			temp.next = null;
 			last = temp;
 			size--;
