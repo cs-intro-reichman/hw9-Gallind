@@ -31,6 +31,7 @@ public class LocalTester {
             for (int i = 0; i < questions.length; i++) {
                 testHandler.questionDecider(questions[i], new String[0]);
             }
+            
         } else if (input.toLowerCase().replaceAll(" ", "").equals("linkedlist") || input.equals((questions.length + 1) + "")) {
             String[] questionArgs = new String[0];
             for (int i = 0; i < questions.length; i++) {
