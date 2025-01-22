@@ -75,6 +75,7 @@ public class MemorySpace {
 			}
 		}
 			*/
+		/* */
 		MemoryBlock tempBlock = null;
 		ListIterator iterator = freeList.iterator();
 		while (iterator.hasNext()) {

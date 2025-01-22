@@ -128,6 +128,7 @@ public class LinkedList {
 	 *        the given memory block
 	 */
 	public void addLast(MemoryBlock block) {
+		if (block == null) return;
 		if (this.last == null){
 			last = new Node(block);
 			first = last;
@@ -214,25 +215,31 @@ public class LinkedList {
 					" NullPointerException!");
 		}
 		int index = indexOf(node.block);
-		if (index == -1) return;
+		if (index < 0) return;
 		if (index == 0){
 			first = first.next;
-			if (size == 1){
+			if (first == null){
 				last = null;
 			}
 			size--;
 			return;
 		}
-		Node temp = first;
-		if (index == size){
-			for (int i = 0; i < index - 1; i++) {
+		Node temp = null;;
+		if (index == size - 1){
+			/*for (int i = 0; i < index - 1; i++) {
 				temp = temp.next;
-			}
+			}*/
+			temp = getNode(size - 1);
 			temp.next = null;
 			last = temp;
 			size--;
 			return;
 		}
+		Node before = getNode(index - 1);
+		Node after = getNode(index + 1);
+		before.next = after;
+		size--;
+		/*
 		for (int i = 0; i < index - 1; i++) {
 			temp = temp.next;
 		}
@@ -242,6 +249,7 @@ public class LinkedList {
 			last = temp;
 		}
 		return;
+		*/
 	}
 
 	/**
@@ -268,12 +276,15 @@ public class LinkedList {
 	 *         if the given memory block is not in this list
 	 */
 	public void remove(MemoryBlock block) {
+		remove(getNode(indexOf(block)));
+		/*
 		int index = indexOf(block);
 		if (index < 0) {
 			throw new IllegalArgumentException(
 					"index must be between 0 and size");
 		}
 		remove(index);
+		*/
 	}	
 
 	/**
