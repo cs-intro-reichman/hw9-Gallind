@@ -253,17 +253,24 @@ public class LinkedList {
 	/**
 	 * A textual representation of this list, for debugging.
 	 */
-	public String toString() {
+	public String toString() {/*
 		if (first == null){
 			return "the list is empty";
 		}
 		String result = "{";
 		Node temp = first;
 		for (int i = 0; i < size - 1; i++) {
-			result += temp.toString() + " --> ";
+			result += temp.toString() + " ";
 			temp = temp.next;
 		}
 		result += temp.toString() + " --> null}";
+		return result;*/
+		String result = "";
+		Node temp = first;
+		while (temp != null) {
+			result += temp.block + " ";
+			temp = temp.next;
+		}
 		return result;
 	}
 }
