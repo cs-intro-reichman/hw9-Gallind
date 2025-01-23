@@ -54,6 +54,7 @@ public class LinkedList {
 			throw new IllegalArgumentException(
 					"index must be between 0 and size");
 		}
+
 	 	Node current = first;
 		for (int i = 0; i < index; i++) {
 			current = current.next;
@@ -85,37 +86,19 @@ public class LinkedList {
 			throw new IllegalArgumentException(
 					"index must be between 0 and size");
 		}
-		if (size == 0){
-			Node newNode = new Node(block);
-			newNode.next = first;
-			first = newNode;
-			last = first;
-			size++;
+		if (size == 0 || index == size){
+			addLast(block);
 			return;
 		}
 		if (index == 0){
-			Node newNode = new Node(block);
-			newNode.next = first;
-			first = newNode;
-			size++;
+			addFirst(block);
 			return;
 		}
-		
-		
-		if (index == size){
-			last.next = new Node(block);
-			last = last.next;
-			size++;
-			return;
-		}
-			
-		Node temp = first;
-		for (int i = 0; i < index - 1; i++) {
-			temp = temp.next;
-		}
+		Node before = getNode(index - 1);
+		Node after = getNode(index);
 		Node newNode = new Node(block);
-		newNode.next = temp.next;
-		temp.next = newNode;
+		newNode.next = after;
+		before.next = newNode;
 		size++;
 		return;
 	}
@@ -195,11 +178,6 @@ public class LinkedList {
 			index++;
 			temp = temp.next;
 		}
-		/*
-		for (int i = 0; i < size; i++) {
-			if (temp.block.equals(block)) return i;
-			temp = temp.next;
-		}*/
 		return -1;
 	}
 
@@ -226,9 +204,6 @@ public class LinkedList {
 		}
 		Node temp = null;;
 		if (index == size - 1){
-			/*for (int i = 0; i < index - 1; i++) {
-				temp = temp.next;
-			}*/
 			temp = getNode(size - 2);
 			temp.next = null;
 			last = temp;
@@ -239,17 +214,6 @@ public class LinkedList {
 		Node after = getNode(index + 1);
 		before.next = after;
 		size--;
-		/*
-		for (int i = 0; i < index - 1; i++) {
-			temp = temp.next;
-		}
-		temp.next = temp.next.next;
-		size--;
-		if (index == size){
-			last = temp;
-		}
-		return;
-		*/
 	}
 
 	/**
@@ -277,14 +241,6 @@ public class LinkedList {
 	 */
 	public void remove(MemoryBlock block) {
 		remove(getNode(indexOf(block)));
-		/*
-		int index = indexOf(block);
-		if (index < 0) {
-			throw new IllegalArgumentException(
-					"index must be between 0 and size");
-		}
-		remove(index);
-		*/
 	}	
 
 	/**
