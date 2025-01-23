@@ -109,6 +109,9 @@ public class MemorySpace {
 	 *            the starting address of the block to freeList
 	 */
 	public void free(int address) {
+		if (allocatedList.getSize() == 0) { 
+			throw new IllegalArgumentException("index must be between 0 and size");
+		}
 		ListIterator iterator = allocatedList.iterator();
 		while (iterator.hasNext()) {
 			MemoryBlock tMemoryBlock = iterator.next();
@@ -134,7 +137,19 @@ public class MemorySpace {
 	 * In this implementation Malloc does not call defrag.
 	 */
 	public void defrag() {
-		/// TODO: Implement defrag test
-		//// Write your code here
+		ListIterator mainIterator = freeList.iterator();
+		ListIterator secondIterator = freeList.iterator();
+		while (mainIterator.hasNext()) {
+			MemoryBlock tMemoryBlock = mainIterator.next();
+			int baseSearch = tMemoryBlock.baseAddress + tMemoryBlock.length;
+			while (secondIterator.hasNext()){
+				MemoryBlock tMemoryBlock2 = secondIterator.next();
+				if (baseSearch == tMemoryBlock2.baseAddress) {
+					tMemoryBlock.length += tMemoryBlock2.length;
+					freeList.remove(tMemoryBlock2);
+					defrag();
+				}
+			}
+		}
 	}
 }
